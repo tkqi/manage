@@ -33,7 +33,7 @@
         </el-col>
         <el-col :span="16">
             <div class="buy">
-                <el-card v-for="(item, index) in countData" :key="index" :body-style="{ display: 'flex',padding:0 }">
+                <el-card v-for="(item, index) in countData" :key="index" :body-style="{ display: 'flex' }">
                     <i class="icon" :class="`el-icon-${item.icon}`" :style="{ background: item.color }"></i>
                     <div class="buy-content">
                         <p class="value">{{ '￥' + item.value }}</p>
@@ -142,6 +142,7 @@ export default {
                 color: #fff000;
             }
         }
+
         img {
             height: 150px;
             width: 150px;
@@ -176,8 +177,10 @@ export default {
 .buy {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-
+    justify-content: space-around;
+    el-card{
+        width: 32%;
+    }
     .icon {
         width: 80px;
         height: 80px;
@@ -192,7 +195,6 @@ export default {
         flex-direction: column;
         justify-content: center;
         margin-left: 15px;
-
         .value {
             font-size: 30px;
             line-height: 30px;
@@ -206,10 +208,5 @@ export default {
             color: rgb(245, 212, 170);
         }
     }
-
-    .el-card {
-        width: 32%;
-        margin-bottom: 20px;
-        margin-left: 10px;
-    }
-}</style>
+}
+</style>

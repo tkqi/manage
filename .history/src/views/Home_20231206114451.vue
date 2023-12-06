@@ -142,6 +142,7 @@ export default {
                 color: #fff000;
             }
         }
+
         img {
             height: 150px;
             width: 150px;

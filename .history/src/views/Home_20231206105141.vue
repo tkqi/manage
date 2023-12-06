@@ -32,15 +32,7 @@
             </div>
         </el-col>
         <el-col :span="16">
-            <div class="buy">
-                <el-card v-for="(item, index) in countData" :key="index" :body-style="{ display: 'flex',padding:0 }">
-                    <i class="icon" :class="`el-icon-${item.icon}`" :style="{ background: item.color }"></i>
-                    <div class="buy-content">
-                        <p class="value">{{ '￥' + item.value }}</p>
-                        <p class="label">{{ item.label }}</p>
-                    </div>
-                </el-card>
-            </div>
+            <div class="grid-content bg-purple-light"></div>
         </el-col>
     </el-row>
 </template>
@@ -81,42 +73,42 @@ export default {
                     buyall: 6000
                 }
             ],
-            countData: [
+            countData:[
                 {
-                    label: '今日支付订单',
-                    value: 1234,
-                    color: '#2ec7c9',
-                    icon: 'success'
+                    label:'今日支付订单',
+                    value:1234,
+                    color:'#2ec7c9',
+                    icon:'success'
                 },
                 {
-                    label: '今日收藏订单',
-                    value: 120,
-                    color: '#ffb980',
-                    icon: 'star-on'
+                    label:'今日收藏订单',
+                    value:120,
+                    color:'#ffb980',
+                    icon:'star-on'
                 },
                 {
-                    label: '今日未支付订单',
-                    value: 180,
-                    color: '#5ab1ef',
-                    icon: 's-goods'
+                    label:'今日未支付订单',
+                    value:180,
+                    color:'#5ab1ef',
+                    icon:'s-goods'
                 },
                 {
-                    label: '本月支付订单',
-                    value: 1234,
-                    color: '#2ec7c9',
-                    icon: 'success'
+                    label:'本月支付订单',
+                    value:1234,
+                    color:'#2ec7c9',
+                    icon:'success'
                 },
                 {
-                    label: '本月收藏订单',
-                    value: 120,
-                    color: '#ffb980',
-                    icon: 'star-on'
+                    label:'本月收藏订单',
+                    value:120,
+                    color:'#ffb980',
+                    icon:'star-on'
                 },
                 {
-                    label: '本月未支付订单',
-                    value: 180,
-                    color: '#5ab1ef',
-                    icon: 's-goods'
+                    label:'本月未支付订单',
+                    value:180,
+                    color:'#5ab1ef',
+                    icon:'s-goods'
                 }
             ]
         }
@@ -126,7 +118,6 @@ export default {
 <style lang="less" scoped>
 .box-card {
     height: 30vh;
-
     .user {
         display: flex;
         align-items: center;
@@ -142,6 +133,7 @@ export default {
                 color: #fff000;
             }
         }
+
         img {
             height: 150px;
             width: 150px;
@@ -166,50 +158,6 @@ export default {
 
 .table {
     margin-top: 10px;
-    height: 50vh;
-
-    el-table {
-        height: 100%;
-    }
+    height: auto;
 }
-
-.buy {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    .icon {
-        width: 80px;
-        height: 80px;
-        font-size: 30px;
-        color: #fff;
-        text-align: center;
-        line-height: 80px;
-    }
-
-    .buy-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin-left: 15px;
-
-        .value {
-            font-size: 30px;
-            line-height: 30px;
-            margin-bottom: 10px;
-            height: 30px;
-        }
-
-        .label {
-            font-size: 15px;
-            text-align: center;
-            color: rgb(245, 212, 170);
-        }
-    }
-
-    .el-card {
-        width: 32%;
-        margin-bottom: 20px;
-        margin-left: 10px;
-    }
-}</style>
+</style>

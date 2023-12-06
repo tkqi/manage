@@ -142,6 +142,7 @@ export default {
                 color: #fff000;
             }
         }
+
         img {
             height: 150px;
             width: 150px;
@@ -210,6 +211,5 @@ export default {
     .el-card {
         width: 32%;
         margin-bottom: 20px;
-        margin-left: 10px;
     }
 }</style>

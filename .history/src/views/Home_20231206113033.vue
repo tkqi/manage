@@ -33,10 +33,10 @@
         </el-col>
         <el-col :span="16">
             <div class="buy">
-                <el-card v-for="(item, index) in countData" :key="index" :body-style="{ display: 'flex',padding:0 }">
+                <el-card v-for="(item, index) in countData" :key="index" :body-style="{ display: 'flex', width:'30%'}">
                     <i class="icon" :class="`el-icon-${item.icon}`" :style="{ background: item.color }"></i>
                     <div class="buy-content">
-                        <p class="value">{{ '￥' + item.value }}</p>
+                        <p class="value">{{ item.value }}</p>
                         <p class="label">{{ item.label }}</p>
                     </div>
                 </el-card>
@@ -142,6 +142,7 @@ export default {
                 color: #fff000;
             }
         }
+
         img {
             height: 150px;
             width: 150px;
@@ -172,44 +173,28 @@ export default {
         height: 100%;
     }
 }
-
-.buy {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
+.buy{
     .icon {
-        width: 80px;
-        height: 80px;
-        font-size: 30px;
-        color: #fff;
-        text-align: center;
-        line-height: 80px;
+    width: 80px;
+    height: 80px;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    line-height: 80px;
     }
-
-    .buy-content {
+    .buy-content{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-left: 15px;
-
-        .value {
-            font-size: 30px;
-            line-height: 30px;
-            margin-bottom: 10px;
-            height: 30px;
+        .value{
+            font-size: 40px;
+            line-height: 40px;
         }
-
-        .label {
-            font-size: 15px;
-            text-align: center;
-            color: rgb(245, 212, 170);
+        .label{
+            font-size: 20px;
+            line-height: 40px;
         }
     }
+}
 
-    .el-card {
-        width: 32%;
-        margin-bottom: 20px;
-        margin-left: 10px;
-    }
-}</style>
+</style>
