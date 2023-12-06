@@ -125,7 +125,7 @@ export default {
     },
     mounted() {
         getData().then(res => {
-            console.log(res);
+            this.tableData = res.data;
         })
     }
 }

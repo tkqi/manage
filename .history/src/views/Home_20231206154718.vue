@@ -46,8 +46,8 @@
 </template>
 
 <script>
-
-import { getData } from '@/api/index';
+ 
+import {getData} from '@/api/index';
 export default {
     data() {
         return {
@@ -122,11 +122,6 @@ export default {
                 }
             ]
         }
-    },
-    mounted() {
-        getData().then(res => {
-            console.log(res);
-        })
     }
 }
 </script>
