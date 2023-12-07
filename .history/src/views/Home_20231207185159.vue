@@ -152,7 +152,9 @@ export default {
             // 柱状图配置
             var option2 = {
                 legend: {
+                    // Try 'horizontal'
                     orient: 'horizontal',
+                    // right: 10,
                     top: 10
                 },
                 xAxis: {

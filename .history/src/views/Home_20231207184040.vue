@@ -110,22 +110,23 @@ export default {
     },
     mounted() {
         getData().then(res => {
-            // 接口数据获取
+            console.log(res);
             const data1 = res.data.data;
             // 表格数据
             this.tableData = data1.tableData;
+            // 柱状图数据
+
+            console.log(data1);
 
             // 初始化echarts对象，通过refs获取dom元素
             const echarts1 = echarts.init(this.$refs.echarts1);
             const echarts2 = echarts.init(this.$refs.echarts2);
             const echarts3 = echarts.init(this.$refs.echarts3);
 
-            // 折线图配置
+
+            // 折线图
             var dataLegend = Object.keys(data1.orderData.data[0])
             var option1 = {
-                tooltip: {
-                    trigger: 'item'
-                },
                 xAxis: {
                     type: 'category',
                     data: data1.orderData.date
@@ -151,25 +152,16 @@ export default {
 
             // 柱状图配置
             var option2 = {
-                legend: {
-                    orient: 'horizontal',
-                    top: 10
-                },
                 xAxis: {
                     data: data1.userData.map(item => item.date)
-                },
-                tooltip: {
-                    trigger: 'item'
                 },
                 yAxis: {},
                 series: [
                     {
-                        name: '新用户',
                         type: 'bar',
                         data: data1.userData.map(item => item.new)
                     },
                     {
-                        name: '活跃用户',
                         type: 'bar',
                         data: data1.userData.map(item => item.active)
                     }
@@ -184,9 +176,6 @@ export default {
 
             // 饼图配置
             var option3 = {
-                tooltip: {
-                    trigger: 'item'
-                },
                 series: [
                     {
                         type: 'pie',

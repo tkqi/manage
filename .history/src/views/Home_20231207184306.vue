@@ -123,9 +123,6 @@ export default {
             // 折线图配置
             var dataLegend = Object.keys(data1.orderData.data[0])
             var option1 = {
-                tooltip: {
-                    trigger: 'item'
-                },
                 xAxis: {
                     type: 'category',
                     data: data1.orderData.date
@@ -151,25 +148,18 @@ export default {
 
             // 柱状图配置
             var option2 = {
-                legend: {
-                    orient: 'horizontal',
-                    top: 10
-                },
                 xAxis: {
                     data: data1.userData.map(item => item.date)
-                },
-                tooltip: {
-                    trigger: 'item'
                 },
                 yAxis: {},
                 series: [
                     {
-                        name: '新用户',
+                        name:'新用户',
                         type: 'bar',
                         data: data1.userData.map(item => item.new)
                     },
                     {
-                        name: '活跃用户',
+                        name:'活跃用户',
                         type: 'bar',
                         data: data1.userData.map(item => item.active)
                     }
@@ -184,9 +174,6 @@ export default {
 
             // 饼图配置
             var option3 = {
-                tooltip: {
-                    trigger: 'item'
-                },
                 series: [
                     {
                         type: 'pie',

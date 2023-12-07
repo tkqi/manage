@@ -2,7 +2,7 @@
 <template>
     <el-menu class="menu" @open="handleOpen" @close="handleClose" :collapse="isCollapse" background-color="#545c64"
         text-color="#fff" active-text-color="#ffd04b">
-        <h3>{{ !isCollapse ? '后台管理系统' : '后台' }}</h3>
+        <h3>{{ !isCollapse?'后台管理系统':'后台' }}</h3>
         <el-menu-item v-for="item in noChildren" :key="item.name" :index="item.name" @click="clickMenu(item)">
             <i :class="`el-icon-${item.icon}`"></i>
             <span slot="title">{{ item.label }}</span>
@@ -36,7 +36,7 @@ export default {
             return this.menuData.filter(o => o.children);
         },
         isCollapse() {
-            return this.$store.state.tab.isCollapse;
+           return this.$store.state.tab.isCollapse;
         }
     },
     data() {
@@ -98,21 +98,18 @@ export default {
         clickMenu(item) {
             console.log(this.$router.currentRoute.path);
             // 判断当前路由于点击链接的路由不一致才跳转
-            // route: 当前页面路由对象
-            // router: 全局路由实例
+            // route:当前页面路由对象
+            // router:全局路由实例
             if (item.path != this.$route.path && !(this.$route.path == '/home' && item.path == '/'))
                 this.$router.push(item.path);
 
             // 触发mutation事件，改变面包屑的值
-            this.$store.commit('EDITTabList', item)
+            this.$store.commit('EDITTabList', this.$route.path)
         },
         clickSubmenu(subitem) {
             // 判断当前路由于点击链接的路由不一致才跳转
             if (subitem.path != this.$route.path)
                 this.$router.push(subitem.path);
-
-            // 触发mutation事件，改变面包屑的值
-            this.$store.commit('EDITTabList', subitem)
         }
     }
 }
@@ -126,8 +123,7 @@ export default {
 
 .menu {
     height: 100vh;
-    border-right: 0;
-
+    border-right:0;
     h3 {
         color: rgb(255, 255, 255);
         text-align: center;

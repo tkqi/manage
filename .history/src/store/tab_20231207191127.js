@@ -22,9 +22,9 @@ export default {
         EDITIsCollapse(state) {
             state.isCollapse = !state.isCollapse;
         },
-        EDITTabList(state, val) {
-            if (!state.tabList.find(item=>item.name == val.name) && val.name != 'home')
-                state.tabList.push(val);
+        EDITTabList(state, path) {
+            if (path.meta.title != state.tabList[state.tabList.length].meta.title)
+                state.tabList.push(path);
         }
     }
 }

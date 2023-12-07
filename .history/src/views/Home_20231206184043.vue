@@ -1,8 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<!-- eslint-disable no-unused-vars -->
 <template>
     <el-row>
-        <el-col :span="8" class="left-col">
+        <el-col :span="8">
             <div>
                 <el-card class="box-card">
                     <div class="user">
@@ -20,19 +19,19 @@
                 </el-card>
                 <el-card class="table">
                     <el-table :data="tableData" border style="width: 100%">
-                        <el-table-column prop="name" label="品牌" :min-width="30" width="auto" align="center">
+                        <el-table-column prop="course" label="课程" :min-width="30" width="auto" align="center">
                         </el-table-column>
-                        <el-table-column prop="todayBuy" label="今日购买" :min-width="30" width="auto">
+                        <el-table-column prop="buytoday" label="今日购买" :min-width="30" width="auto">
                         </el-table-column>
-                        <el-table-column prop="monthBuy" label="本月购买" :min-width="30" width="auto">
+                        <el-table-column prop="buythemonth" label="本月购买" :min-width="30" width="auto">
                         </el-table-column>
-                        <el-table-column prop="totalBuy" label="总购买" :min-width="30" width="auto">
+                        <el-table-column prop="buyall" label="总购买" :min-width="30" width="auto">
                         </el-table-column>
                     </el-table>
                 </el-card>
             </div>
         </el-col>
-        <el-col :span="16" class="right-col">
+        <el-col :span="16">
             <div class="buy">
                 <el-card v-for="(item, index) in countData" :key="index" :body-style="{ display: 'flex', padding: 0 }">
                     <i class="icon" :class="`el-icon-${item.icon}`" :style="{ background: item.color }"></i>
@@ -42,19 +41,6 @@
                     </div>
                 </el-card>
             </div>
-            <div>
-                <el-card style="height: 280px;">
-                    <div ref="echarts1" style="height: 280px;width:auto;"></div>
-                </el-card>
-            </div>
-            <div class="bottom-map">
-                <el-card>
-                    <div ref="echarts2" style="height: 260px;"></div>
-                </el-card>
-                <el-card>
-                    <div ref="echarts3" style="height: 260px;"></div>
-                </el-card>
-            </div>
         </el-col>
     </el-row>
 </template>
@@ -62,11 +48,41 @@
 <script>
 
 import { getData } from '@/api/index';
-import * as echarts from "echarts";
 export default {
     data() {
         return {
-            tableData: [],
+            tableData: [
+                {
+                    course: 'C#',
+                    buytoday: 20,
+                    buythemonth: 300,
+                    buyall: 3000
+                },
+                {
+                    course: 'js',
+                    buytoday: 40,
+                    buythemonth: 1000,
+                    buyall: 5000
+                },
+                {
+                    course: 'vue',
+                    buytoday: 10,
+                    buythemonth: 200,
+                    buyall: 3000
+                },
+                {
+                    course: 'sql',
+                    buytoday: 8,
+                    buythemonth: 150,
+                    buyall: 1400
+                },
+                {
+                    course: 'go',
+                    buytoday: 20,
+                    buythemonth: 1000,
+                    buyall: 6000
+                }
+            ],
             countData: [
                 {
                     label: '今日支付订单',
@@ -104,106 +120,15 @@ export default {
                     color: '#5ab1ef',
                     icon: 's-goods'
                 }
-            ],
-            myChart: undefined
+            ]
         }
     },
     mounted() {
         getData().then(res => {
-            // 接口数据获取
+            console.log(res);
             const data1 = res.data.data;
-            // 表格数据
-            this.tableData = data1.tableData;
-
-            // 初始化echarts对象，通过refs获取dom元素
-            const echarts1 = echarts.init(this.$refs.echarts1);
-            const echarts2 = echarts.init(this.$refs.echarts2);
-            const echarts3 = echarts.init(this.$refs.echarts3);
-
-            // 折线图配置
-            var dataLegend = Object.keys(data1.orderData.data[0])
-            var option1 = {
-                tooltip: {
-                    trigger: 'item'
-                },
-                xAxis: {
-                    type: 'category',
-                    data: data1.orderData.date
-                },
-                yAxis: {
-                    type: 'value'
-                },
-                legend: {
-                    data: dataLegend
-                },
-                series: [
-                ]
-            };
-            dataLegend.forEach(key => {
-                option1.series.push({
-                    name: key,
-                    type: 'line',
-                    data: data1.orderData.data.map(item =>
-                        item[key]
-                    )
-                })
-            })
-
-            // 柱状图配置
-            var option2 = {
-                legend: {
-                    orient: 'horizontal',
-                    top: 10
-                },
-                xAxis: {
-                    data: data1.userData.map(item => item.date)
-                },
-                tooltip: {
-                    trigger: 'item'
-                },
-                yAxis: {},
-                series: [
-                    {
-                        name: '新用户',
-                        type: 'bar',
-                        data: data1.userData.map(item => item.new)
-                    },
-                    {
-                        name: '活跃用户',
-                        type: 'bar',
-                        data: data1.userData.map(item => item.active)
-                    }
-                ],
-            };
-
-
-            const dataPie = [];
-            data1.videoData.forEach(item => {
-                dataPie.push({ value: item.value, name: item.name })
-            })
-
-            // 饼图配置
-            var option3 = {
-                tooltip: {
-                    trigger: 'item'
-                },
-                series: [
-                    {
-                        type: 'pie',
-                        data: dataPie
-                    }
-                ]
-            };
-
-            // 使用刚指定的配置项和数据显示图表
-            echarts1.setOption(option1);
-            echarts2.setOption(option2);
-            echarts3.setOption(option3);
-        });
-    },
-    created() {
-    },
-    methods: {
+            console.log(data1);
+        })
     }
 }
 </script>
@@ -250,8 +175,8 @@ export default {
 }
 
 .table {
-    margin-top: 20px;
-    height: 470px;
+    margin-top: 10px;
+    height: 50vh;
 
     el-table {
         height: 100%;
@@ -295,26 +220,7 @@ export default {
     .el-card {
         width: 32%;
         margin-bottom: 20px;
-    }
-}
-
-.right-col {
-    padding-left: 10px;
-}
-
-.left-col {
-    padding-right: 10px;
-}
-
-.bottom-map {
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .el-card {
-        height: 260px;
-        width: 48%;
+        margin-left: 10px;
     }
 }
 </style>

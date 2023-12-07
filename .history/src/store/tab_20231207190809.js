@@ -6,12 +6,12 @@ export default {
         // 面包屑
         tabList: [
             {
-                path: '/',
-                name: 'home',
-                label: "首页",
-                icon: 's-home',
-                url: 'Home/Home'
-            },
+                // 首页
+                path: '/home',
+                // 路由组件懒加载
+                component: () => import('../views/Home.vue'),
+                meta: { title: '首页' }
+            }
         ]
     },
     getters: {
@@ -22,9 +22,9 @@ export default {
         EDITIsCollapse(state) {
             state.isCollapse = !state.isCollapse;
         },
-        EDITTabList(state, val) {
-            if (!state.tabList.find(item=>item.name == val.name) && val.name != 'home')
-                state.tabList.push(val);
+        EDITTabList(state, path) {
+            if (path.meta.title != state.tabList[state.tabList.length].meta.title)
+                state.tabList.push(path);
         }
     }
 }

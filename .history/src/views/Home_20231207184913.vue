@@ -151,10 +151,6 @@ export default {
 
             // 柱状图配置
             var option2 = {
-                legend: {
-                    orient: 'horizontal',
-                    top: 10
-                },
                 xAxis: {
                     data: data1.userData.map(item => item.date)
                 },

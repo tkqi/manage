@@ -23,7 +23,7 @@ export default {
             state.isCollapse = !state.isCollapse;
         },
         EDITTabList(state, val) {
-            if (!state.tabList.find(item=>item.name == val.name) && val.name != 'home')
+            if (val.path != state.tabList[state.tabList.length].path && val.name != 'home')
                 state.tabList.push(val);
         }
     }

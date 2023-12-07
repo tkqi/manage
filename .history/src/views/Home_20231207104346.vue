@@ -44,16 +44,12 @@
             </div>
             <div>
                 <el-card style="height: 280px;">
-                    <div ref="echarts1" style="height: 280px;width:auto;"></div>
+                    <div ref="echarts1"></div>
                 </el-card>
             </div>
             <div class="bottom-map">
-                <el-card>
-                    <div ref="echarts2" style="height: 260px;"></div>
-                </el-card>
-                <el-card>
-                    <div ref="echarts3" style="height: 260px;"></div>
-                </el-card>
+                <el-card></el-card>
+                <el-card></el-card>
             </div>
         </el-col>
     </el-row>
@@ -110,100 +106,36 @@ export default {
     },
     mounted() {
         getData().then(res => {
-            // 接口数据获取
+            console.log(res);
             const data1 = res.data.data;
-            // 表格数据
             this.tableData = data1.tableData;
+            console.log(data1);
+        });
 
-            // 初始化echarts对象，通过refs获取dom元素
-            const echarts1 = echarts.init(this.$refs.echarts1);
-            const echarts2 = echarts.init(this.$refs.echarts2);
-            const echarts3 = echarts.init(this.$refs.echarts3);
-
-            // 折线图配置
-            var dataLegend = Object.keys(data1.orderData.data[0])
-            var option1 = {
-                tooltip: {
-                    trigger: 'item'
-                },
+        const echarts = echarts.init(this.$refs.echarts1)
+    },
+    created() {
+        this.getEcharts1();
+    },
+    methods: {
+        getEcharts1() {
+            var option = {
                 xAxis: {
                     type: 'category',
-                    data: data1.orderData.date
+                    data: ['A', 'B', 'C']
                 },
                 yAxis: {
                     type: 'value'
                 },
-                legend: {
-                    data: dataLegend
-                },
-                series: [
-                ]
-            };
-            dataLegend.forEach(key => {
-                option1.series.push({
-                    name: key,
-                    type: 'line',
-                    data: data1.orderData.data.map(item =>
-                        item[key]
-                    )
-                })
-            })
-
-            // 柱状图配置
-            var option2 = {
-                legend: {
-                    orient: 'horizontal',
-                    top: 10
-                },
-                xAxis: {
-                    data: data1.userData.map(item => item.date)
-                },
-                tooltip: {
-                    trigger: 'item'
-                },
-                yAxis: {},
                 series: [
                     {
-                        name: '新用户',
-                        type: 'bar',
-                        data: data1.userData.map(item => item.new)
-                    },
-                    {
-                        name: '活跃用户',
-                        type: 'bar',
-                        data: data1.userData.map(item => item.active)
-                    }
-                ],
-            };
-
-
-            const dataPie = [];
-            data1.videoData.forEach(item => {
-                dataPie.push({ value: item.value, name: item.name })
-            })
-
-            // 饼图配置
-            var option3 = {
-                tooltip: {
-                    trigger: 'item'
-                },
-                series: [
-                    {
-                        type: 'pie',
-                        data: dataPie
+                        data: [120, 200, 150],
+                        type: 'line'
                     }
                 ]
             };
-
-            // 使用刚指定的配置项和数据显示图表
-            echarts1.setOption(option1);
-            echarts2.setOption(option2);
-            echarts3.setOption(option3);
-        });
-    },
-    created() {
-    },
-    methods: {
+            this.echarts.setOption(option);
+        }
     }
 }
 </script>

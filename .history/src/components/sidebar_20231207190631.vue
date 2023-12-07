@@ -104,15 +104,12 @@ export default {
                 this.$router.push(item.path);
 
             // 触发mutation事件，改变面包屑的值
-            this.$store.commit('EDITTabList', item)
+            this.$store.commit('EDITTabList', this.$route.path)
         },
         clickSubmenu(subitem) {
             // 判断当前路由于点击链接的路由不一致才跳转
             if (subitem.path != this.$route.path)
                 this.$router.push(subitem.path);
-
-            // 触发mutation事件，改变面包屑的值
-            this.$store.commit('EDITTabList', subitem)
         }
     }
 }

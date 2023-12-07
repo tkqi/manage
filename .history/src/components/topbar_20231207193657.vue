@@ -5,10 +5,10 @@
             <el-button icon="el-icon-s-grid" size="mini" @click="changeCollapse()" />
             <!-- 面包屑 -->
             <span class="text">
-                <el-breadcrumb separator-class="el-icon-arrow-right">
+                <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
                     <el-breadcrumb-item v-for="item in tags" :key="item.name" :to="{ path: item.path }">{{ item.label
                     }}</el-breadcrumb-item>
-                </el-breadcrumb>
+                </el-breadcrumb> -->
             </span>
         </div>
         <div class="r-content">
@@ -56,35 +56,6 @@ export default {
     align-items: center;
     padding-left: 15px;
     padding-right: 20px;
-
-    .text {
-        color: white;
-        font-size: 14px;
-        padding-left: 10px;
-    }
-
-    .l-content {
-        display: flex;
-        align-items: center;
-
-        // 样式穿刺 
-        /deep/.el-breadcrumb__item {
-            .el-breadcrumb__inner {  
-                font-weight: normal;
-
-                &.is-link {
-                    color: #666;
-                }
-            }
-
-            // 伪类
-            &:last-child {
-                .el-breadcrumb__inner {
-                    color: #fff;
-                }
-            }
-        }
-    }
 }
 
 // .l-content {
@@ -93,7 +64,11 @@ export default {
 
 // .r-content {}
 
-
+.text {
+    color: white;
+    font-size: 14px;
+    padding-left: 10px;
+}
 
 .img {
     height: 40px;

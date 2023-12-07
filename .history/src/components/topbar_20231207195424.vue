@@ -69,7 +69,7 @@ export default {
 
         // 样式穿刺 
         /deep/.el-breadcrumb__item {
-            .el-breadcrumb__inner {  
+            .el-breadcrumb__inner {
                 font-weight: normal;
 
                 &.is-link {

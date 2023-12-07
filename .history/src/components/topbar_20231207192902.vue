@@ -5,9 +5,11 @@
             <el-button icon="el-icon-s-grid" size="mini" @click="changeCollapse()" />
             <!-- 面包屑 -->
             <span class="text">
-                <el-breadcrumb separator-class="el-icon-arrow-right">
-                    <el-breadcrumb-item v-for="item in tags" :key="item.name" :to="{ path: item.path }">{{ item.label
-                    }}</el-breadcrumb-item>
+                <el-breadcrumb separator-class="el-icon-arrow-right" v-for="">
+                    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+                    <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+                    <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+                    <el-breadcrumb-item>活动详情</el-breadcrumb-item>
                 </el-breadcrumb>
             </span>
         </div>
@@ -35,13 +37,13 @@ export default {
     },
     methods: {
         changeCollapse() {
-            console.log(this.tags);
+            console.log(1);
             this.$store.commit('EDITIsCollapse');
         }
     },
     computed: {
         ...mapState({
-            tags: state => state.tab.tabList
+            tags: state => state.tags.tableList
         })
     }
 }
@@ -56,35 +58,6 @@ export default {
     align-items: center;
     padding-left: 15px;
     padding-right: 20px;
-
-    .text {
-        color: white;
-        font-size: 14px;
-        padding-left: 10px;
-    }
-
-    .l-content {
-        display: flex;
-        align-items: center;
-
-        // 样式穿刺 
-        /deep/.el-breadcrumb__item {
-            .el-breadcrumb__inner {  
-                font-weight: normal;
-
-                &.is-link {
-                    color: #666;
-                }
-            }
-
-            // 伪类
-            &:last-child {
-                .el-breadcrumb__inner {
-                    color: #fff;
-                }
-            }
-        }
-    }
 }
 
 // .l-content {
@@ -93,7 +66,11 @@ export default {
 
 // .r-content {}
 
-
+.text {
+    color: white;
+    font-size: 14px;
+    padding-left: 10px;
+}
 
 .img {
     height: 40px;
