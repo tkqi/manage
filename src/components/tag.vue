@@ -1,0 +1,53 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+<!-- eslint-disable vue/valid-template-root -->
+<template>
+    <div class="tag-group">
+        <el-tag v-for="item in tags" :key="item.name" :closable="item.name != 'home'"
+            :effect="item.path == $route.path ? 'dark' : 'plain'" @close="handlerClose(item)" @click="handlerClick(item)"
+            class="tag">
+            {{ item.label }}
+        </el-tag>
+    </div>
+</template>
+
+<script>
+
+import { mapState } from 'vuex';
+export default {
+    name: 'headTag',
+    data() {
+        return {
+
+        }
+    },
+    computed: {
+        ...mapState({
+            tags: state => state.tab.tabList
+        })
+    },
+    methods: {
+        handlerClose(item) {
+            this.$store.commit('DELTabList', item);
+            // this.$nextTick(() => {
+            if (this.tags[this.tags.length - 1].path != this.$route.path)
+                this.$router.push(this.tags[this.tags.length - 1].path);
+            // })
+        },
+        handlerClick(item) {
+            if (item.path != this.$route.path)
+                this.$router.push(item.path)
+        }
+    }
+}
+</script>
+
+<style lang="less" scoped>
+.tag-group {
+    margin-left: 10px;
+    margin-top: 5px;
+
+    .tag {
+        margin-left: 5px;
+    }
+}
+</style>

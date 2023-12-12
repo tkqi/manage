@@ -8,8 +8,9 @@
             <el-container>
                 <el-header>
                     <topbar />
+                    <tag/>
                 </el-header>
-                <tag />
+                
                 <el-main>
                     <transition>
                         <keep-alive>
@@ -29,8 +30,7 @@ import tag from '../components/tag.vue'
 export default {
     components: {
         sidebar,
-        topbar,
-        tag
+        topbar
     }
 }
 </script>

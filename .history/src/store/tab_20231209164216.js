@@ -28,7 +28,7 @@ export default {
         },
         DELTabList(state, val) {
             let indexToDel = state.tabList.findIndex(o => o.path == val.path);
-            if (indexToDel != null)
+            if (indexToDel)
                 state.tabList.splice(indexToDel, 1);
         }
     }
